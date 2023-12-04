@@ -1,0 +1,23 @@
+version: '3.0'
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: HW_DB
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+
+  app:
+    image: anshemonaev/fsi:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/HW_DB
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+
+    depends_on:
+      - postgres
+
+    ports:
+      - "8080:8080"
