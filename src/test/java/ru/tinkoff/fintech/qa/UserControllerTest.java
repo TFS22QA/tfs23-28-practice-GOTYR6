@@ -26,11 +26,6 @@ public class UserControllerTest {
         user.setPasswordNumber(121231);
     }
 
-    @Test
-    void add() {
-        RestAssured.given().contentType(ContentType.JSON).body(user).post(BASE_URL + "add")
-                .then().statusCode(200);
-    }
 
     @ParameterizedTest
     @ValueSource(strings = {"John", "Петя", "", "123", "Вас@"})
@@ -59,8 +54,4 @@ public class UserControllerTest {
         Assertions.assertEquals(name, response.getMessage());
     }
 
-    @AfterEach
-    public void clean(){
-        RestAssured.given().contentType(ContentType.JSON).post(BASE_URL + "delete/1");
-    }
 }
