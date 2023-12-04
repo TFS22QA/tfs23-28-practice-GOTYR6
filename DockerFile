@@ -1,0 +1,8 @@
+FROM openjdk:17-oracle
+ENV TZ=Europe/Moscow
+ENV JAVA_OPTS=$MEM_OPTS" -Doracle.jdbc.timezoneAsRegion=false -Doracle.jdbc.thinLogonCapability=o3"
+COPY /build/libs/* app.jar
+RUN useradd --no-log-init -r bb -u 1000
+USER 1000
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app.jar"]
