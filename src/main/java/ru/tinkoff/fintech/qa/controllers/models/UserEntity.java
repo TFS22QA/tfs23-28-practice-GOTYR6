@@ -28,6 +28,14 @@ public class UserEntity {
     @JsonProperty("passportNumber")
     Integer passwordNumber;
 
+    @Column(name="username")
+    @JsonProperty("username")
+    String userName;
+
+    @Column(name = "password")
+    @JsonProperty("password")
+    String password;
+
     public Integer getId() {
         return id;
     }
@@ -66,5 +74,21 @@ public class UserEntity {
 
     public void setPasswordNumber(Integer passwordNumber) {
         this.passwordNumber = passwordNumber;
+    }
+
+    public final String userName() {
+        return userName;
+    }
+
+    public final void setUserName(final String userName) {
+        this.userName = userName;
+    }
+
+    public final String password() {
+        return password;
+    }
+
+    public final void setPassword(final String password) {
+        this.password = password;
     }
 }
