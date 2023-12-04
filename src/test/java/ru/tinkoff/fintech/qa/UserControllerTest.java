@@ -12,7 +12,7 @@ import ru.tinkoff.fintech.qa.controllers.models.Response;
 import ru.tinkoff.fintech.qa.controllers.models.UserEntity;
 
 public class UserControllerTest {
-    public static final String BASE_URL = "http://localhost:8080/api/";
+    public static final String BASE_URL = "https://petstore.swagger.io/v2/user/";
 
     UserEntity user;
 
@@ -32,7 +32,7 @@ public class UserControllerTest {
     public void addNewUser(final String name) {
         user.setFio(name);
         Response response = RestAssured.given().contentType(ContentType.JSON).body(user)
-                .post("https://petstore.swagger.io/v2/user").as(Response.class);
+                .post(BASE_URL).as(Response.class);
         String responseMessage = response.getMessage();
         Assertions.assertEquals("1", responseMessage);
     }
@@ -44,13 +44,13 @@ public class UserControllerTest {
         user.setUserName(name);
         user.setPassword("string");
         RestAssured.given().contentType(ContentType.JSON).body(user)
-                .post("https://petstore.swagger.io/v2/user");
+                .post(BASE_URL);
 
         RestAssured.given().contentType(ContentType.JSON).body(user)
-                .get("https://petstore.swagger.io/v2/user/login").as(Response.class);
+                .get(BASE_URL + "login").as(Response.class);
 
         Response response = RestAssured.given().contentType(ContentType.JSON)
-                .delete("https://petstore.swagger.io/v2/user/" + name).as(Response.class);
+                .delete(BASE_URL + name).as(Response.class);
         Assertions.assertEquals(name, response.getMessage());
     }
 
